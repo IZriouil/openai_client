@@ -9,8 +9,7 @@ import 'package:openai_client/src/network/network.dart';
 /// For more detail see the [OpenAI API documentation](https://beta.openai.com/docs/api-reference/completions/create).
 class OpenAICompletions {
   /// Creates a new instance which belongs to [client].
-  OpenAICompletions(this.client)
-      : baseUrl = client.baseUrl.resolve(apiCompletions);
+  OpenAICompletions(this.client) : baseUrl = client.baseUrl.resolve(apiCompletions);
 
   /// The parent [OpenAIClient].
   final OpenAIClient client;
@@ -35,7 +34,7 @@ class OpenAICompletions {
     bool stream = false,
     int? logprobs,
     bool echo = false,
-    String? stop,
+    List<String>? stop,
     double presencePenalty = 0.0,
     double frequencyPenalty = 0.0,
     int bestOf = 1,
@@ -71,8 +70,7 @@ class OpenAICompletions {
     final req = Request(
       client: client,
       httpRequest: http.Request('POST', baseUrl),
-      bodyDeserializer: (body) =>
-          Completion.fromMap(body as Map<String, dynamic>),
+      bodyDeserializer: (body) => Completion.fromMap(body as Map<String, dynamic>),
       jsonBody: jsonBody,
     );
 
